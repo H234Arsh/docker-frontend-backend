@@ -1,6 +1,9 @@
 from flask import Flask, request, jsonify
 
 app = Flask(__name__)
+@app.route("/")
+def helloworld():
+    return "Hello World!"
 
 @app.route('/process', methods=['POST'])
 def process():
