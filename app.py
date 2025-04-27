@@ -1,9 +1,22 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template_string
 
 app = Flask(__name__)
+
 @app.route("/")
 def helloworld():
-    return "Hello World!"
+    html_content = """
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>My First Flask Page</title>
+    </head>
+    <body>
+        <h1>Hello World!</h1>
+        <p>Welcome to my Flask web app.</p>
+    </body>
+    </html>
+    """
+    return render_template_string(html_content)
 
 @app.route('/process', methods=['POST'])
 def process():
