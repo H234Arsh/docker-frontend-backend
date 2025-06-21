@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Form Submission</title>
+</head>
+<body>
+  <h2>Submit Your Name</h2>
+
+  <form id="form">
+    <label for="name">Name:</label>
+    <input type="text" id="name" placeholder="Enter your name" required />
+    <button type="submit">Submit</button>
+  </form>
+
+  <p id="result" style="margin-top: 20px;"></p>
+
+  <script>
+    document.getElementById("form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const name = document.getElementById("name").value;
+
+      const res = await fetch('/submit', {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name })
+      });
+
+      const result = await res.json();
+      document.getElementById("result").innerText = result.message || "Submitted!";
+    });
+  </script>
+</body>
+</html>
